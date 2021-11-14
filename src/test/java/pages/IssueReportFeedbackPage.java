@@ -9,11 +9,19 @@ public class IssueReportFeedbackPage extends BasePage{
     @FindBy(css = "body > div[align='center']")
     private WebElement successMessageLabel;
 
+    @FindBy(partialLinkText = "View Submitted Issue")
+    private WebElement goToCreatedIssueLink;
+
     protected IssueReportFeedbackPage(WebDriver webDriver) {
         super(webDriver);
     }
 
     public String getMessage(){
         return successMessageLabel.getText();
+    }
+
+    public IssuePage clickViewReport() {
+        goToCreatedIssueLink.click();
+        return new IssuePage(getWebDriver());
     }
 }

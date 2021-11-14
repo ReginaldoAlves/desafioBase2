@@ -46,4 +46,28 @@ public class IssueTest {
         Boolean displayedMessageContainsSuccessfulMessage = displayedMessage.contains("Operation successful.");
         Assertions.assertEquals(Boolean.TRUE, displayedMessageContainsSuccessfulMessage);
     }
+
+    @Test
+    @DisplayName("Adicionar nota em issue existente")
+    public void addNoteToExistingIssue() {
+        String note = "Nota de teste";
+        String noteDisplayed = new LoginPage(webDriver)
+                .fillUsername("reginaldo.alves")
+                .fillPassword("base2@2021")
+                .submitLoginForm()
+                .goToReportIssuePage()
+                .clickToSelectProject()
+                .selectProject()
+                .clickSelectProjectButton()
+                .clickToSelectCategory()
+                .selectCategory()
+                .fillSummary("Título da issue")
+                .fillDescription("Descricão da issue.")
+                .submitReport()
+                .clickViewReport()
+                .addNote(note)
+                .getNote();
+
+        Assertions.assertEquals(note, noteDisplayed);
+    }
 }
